@@ -1,93 +1,84 @@
-/* Instance de type Im */
-
-
-
-function printInstance(inst) {
-    console.log(`
-        Machines : ${inst[0]}
-        Durée des tâches : ${inst[1]}
-    `);
-}
-
-function generateIm() {
-    const m = 3; // Nombre de machines
-    const n = Math.pow(m, 2) + 1 // Nombre de tâches (m^2 + 1)
-    const M = Array(m); // Machines
-    const D = Array(n) // Durée des tâches
-
-    for (let i = 0; i < n - 1; i++) {
-        D[i] = 1;
+class Im {
+    constructor(_m) {
+        this.m = _m; // Nombre de machines
+        this.n = Math.pow(_m, 2) + 1; // Nombre de tâches (m^2 + 1)
+        this.M = new Array(_m).fill(0); // Machines
+        this.D = this.getTasks(); // Tâches
     }
 
-    D[n - 1] = m;
+    getTasks() {
+        const tasks = new Array(this.n-1).fill(1, 0, this.n-1);
+        tasks.push(this.m);
+
+        return tasks;
+    }
+
+    produceResults() {
+        console.log(`
+        Borne inférieure "maximum" =
+        Borne inférieure "moyenne" =
+
+        Résultat LSA =
+        ratio LSA =
+
+        Résultat LPT =
+        ratio LPT =
+
+        Résultat RMA =
+        ratio RMA =
+        `);
+
+        return 1;
+    }
 }
 
-/* Instance de type I'm */
+class IPrimeM {
+    constructor(_m) {
+        this.m = _m;
+        this.n = 2 * _m + 1;
+        this.M = new Array(_m).fill(0);
+        this.D = this.getTasks();
+    }
 
-function generateImPrime() {
-    const m = 9; // Nombre de machines
-    const n = 2 * m + 1 // Nombre de tâches (2m + 1)
-    const M = Array(m); // Machines
-    const D = Array(n) // Durée des tâches
+    getTasks() {
+        let i = 0;
+        let count = this.m;
+        const tasks = new Array(this.n);
 
-    let i = 0;
-    let count = m;
-
-    while (i < D.length) {
-        if (i >= 3 && i % 2 !== 0) {
-            count++;
+        while (i < tasks.length) {
+            if (i >= 3 && i % 2 !== 0) {
+                count++;
+            }
+            tasks[i] = count;
+            i++;
         }
-        D[i] = count;
-        i++;
-    } 
+        
+        return tasks;
+    }
 }
 
-/* Instance de type IR */
-
-function generateIR() {
-    const m = 4; // Nombre de machines
-    const n = 9; // Nombre de tâches (2m + 1)
-    const k = 2; // Nombre d'instances
-
-    const dmin = 1;
-    const dmax = 3;
-    
-    const I = []; // Tableau d'instances
-    const M = new Array(m).fill(0); // Tableau de machines
-    //const D = new Array(n).fill(Math.floor(Math.random() * (dmax - dmin + 1)) + dmin); // Tableau des durées 
-    const D = Array.from({length: n}, () => Math.floor(Math.random() * (dmax - dmin + 1)) + dmin);
-
-    for (let i = 0; i < k; i++) {
-
+class IR {
+    constructor(_m, _n, _k, _dmin, _dmax) {
+        this.m = _m;
+        this.n = _n;
+        this.k = _k;
+        this.dmin = _dmin;
+        this.dmax = _dmax;
+        this.M = new Array(_m).fill(0);
+        this.D = this.getTasks();
+        this.I = new Array(_k);
     }
 
-    /* for (let i = 0; i < m; i++) {
-        M.push(0);
-    } */
-
-    /* new Array(len).fill(0); */
-
-/*     for (let i = 0; i < n; i++) {
-        D.push(Math.floor(Math.random() * (dmax - dmin + 1)) + dmin);
-    } */
-
-    console.log("Nb machines : " + M);
-    console.log("Durée  : " + D);
-
-/*     let instance = [];
-    instance.push(M);
-    instance.push(D);
-
-    I.push(instance);
-
-    console.log("Nb machines : " + m);
-    console.log("Nb tâches : " + n);
-    console.log(`Machines : [${instance[0]}]`);
-    console.log(`Durée des tâches : [${instance[1]}]`);
-
-    printInstance(instance); */
-    
-    // console.log(`Instance : [${instance}]`);
+    getTasks() {
+        return Array.from({length: this.n}, () => Math.floor(Math.random() * (this.dmax - this.dmin + 1)) + this.dmin);
+    }
 }
 
-generateIR();
+// Instantiation d'objet
+
+const inst = new Im(4);
+/* console.log(inst.m);
+console.log(inst.n);
+console.log(inst.M);
+console.log(inst.D); */
+inst.showResults();
