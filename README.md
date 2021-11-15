@@ -1,1 +1,1 @@
-# min-makespan
+# Min Makespan
