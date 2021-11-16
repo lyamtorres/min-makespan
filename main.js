@@ -13,12 +13,36 @@ class Im {
         return tasks;
     }
 
+    getLSA() {
+        let mIndex = 0;
+
+        for (let i = 0; i < this.n; i++) {
+            this.M[mIndex] += this.D[i];
+            mIndex++;
+            if (mIndex === 3) mIndex = 0;
+        }
+
+        return Math.max(...this.M); // Retourne la valeur maximum de M
+    }
+
+    getLPT() {
+
+    }
+
+    getRMA() {
+
+    }
+
+    print() {
+        console.log(this);
+    }
+
     produceResults() {
         console.log(`
         Borne inférieure "maximum" =
         Borne inférieure "moyenne" =
 
-        Résultat LSA =
+        Résultat LSA = ${this.getLSA()}
         ratio LSA =
 
         Résultat LPT =
@@ -76,9 +100,10 @@ class IR {
 
 // Instantiation d'objet
 
-const inst = new Im(4);
+const inst = new Im(3);
 /* console.log(inst.m);
 console.log(inst.n);
 console.log(inst.M);
 console.log(inst.D); */
-inst.showResults();
+inst.produceResults();
+// inst.produceResults();
