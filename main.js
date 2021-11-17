@@ -1,5 +1,3 @@
-// Problème : Je ne peux pas exécuter les méthodes l'une après l'autre, les données sont modifiées
-
 class Mode {
     constructor(_m) {
         this.m = _m;
@@ -14,13 +12,13 @@ class Mode {
         Borne inférieure "maximum" =
         Borne inférieure "moyenne" =
 
-        Résultat LSA = ${this.executeLSA()}
+        Résultat LSA = ${this.LSA()}
         ratio LSA = 
 
-        Résultat LPT = ${this.executeLPT()}
+        Résultat LPT = ${this.LPT()}
         ratio LPT =
 
-        Résultat RMA =
+        Résultat RMA = ${this.RMA()}
         ratio RMA =
         `);
     }
@@ -33,28 +31,43 @@ class Mode {
         return 5;
     }
 
-    executeLSA() {
+    LSA(useLPT) {
         let minorIndex;
+        const machines = new Array(this.m).fill(0);
+        const tasks = [...this.D];
+
+        if (useLPT) tasks.sort().reverse();
 
         for (let i = 0; i < this.n; i++) {
-            minorIndex = this.M.indexOf(Math.min(...this.M));
-            this.M[minorIndex] += this.D[i]; 
+            minorIndex = machines.indexOf(Math.min(...machines));
+            machines[minorIndex] += tasks[i]; 
         }
-        console.log(this.M);
 
-        //return Math.max(...this.M); // Retourne la valeur maximum dans M
+        return Math.max(...machines); // Retourne la valeur maximum dans machines
+    }
+
+    LPT() {
+        return this.LSA(true);
+    }
+
+    RMA() {
+        let randomIndex;
+        const machines = new Array(this.m).fill(0);
+        const tasks = [...this.D];
+
+        for (let i = 0; i < this.n; i++) {
+            randomIndex = Math.floor(Math.random() * (this.m - 0)) + 0;
+            machines[randomIndex] += tasks[i]; 
+        }
+
+        return Math.max(...machines);
     }
 
     calculateRatioLSA() {
         const maxValue = Math.max(this.findLowerBound(), this.findUpperBound());
-        const result = this.executeLSA();
+        const result = this.LSA();
 
         return result / maxValue;
-    }
-
-    executeLPT() {
-        this.D.sort().reverse();
-        this.executeLSA();
     }
 }
 
@@ -62,7 +75,6 @@ class ImMode extends Mode {
     constructor(_m) {
         super(_m);
         this.n = Math.pow(_m, 2) + 1; // Nombre de tâches (m^2 + 1)
-        this.M = new Array(_m).fill(0); // Machines
         this.D = this.getTasks(); // Tâches
     }
 
@@ -78,7 +90,6 @@ class IPrimeMMode extends Mode {
     constructor(_m) {
         super(_m);
         this.n = 2 * _m + 1;
-        this.M = new Array(_m).fill(0);
         this.D = this.getTasks();
     }
 
@@ -116,10 +127,13 @@ class IRMode {
     }
 }
 
-// Instantiation d'objet
+/* Instantiation d'objet */
 
-const inst = new ImMode(3);
+/* const inst = new ImMode(3);
+inst.produce(); */
 
-// inst.executeLSA();
-inst.executeLPT();
+const inst = new IPrimeMMode(3);
+inst.describe();
+inst.produce();
+
 
