@@ -22,7 +22,7 @@ class Mode {
         const lptRatio = lpt / maxLowerBoundValue;
         const rmaRatio = rma / maxLowerBoundValue;
 
-        console.log(`
+        alert(`
         Borne inférieure "maximum" = ${maxLowerBound}
         Borne inférieure "moyenne" = ${mediumLowerBound}
 
@@ -146,7 +146,7 @@ class IR extends Mode {
         mediumLptRatio /= arr.length;
         mediumRmaRatio /= arr.length;
 
-        console.log(`
+        alert(`
         ratio moyen LSA = ${mediumLsaRatio}
         ratio moyen LPT = ${mediumLptRatio}
         ratio moyen RMA = ${mediumRmaRatio}

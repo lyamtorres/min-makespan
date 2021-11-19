@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Solveur Min Makespan</title>
 </head>
 <body>
-    <label for="algorithms">Algorithme: </label>
-    <select name="algorithms" id="algorithms">
-        <option value="lsa" selected>LSA</option>
-        <option value="lpt">LPT</option>
-        <option value="rma">RMA</option>
-    </select><br><br>
-
-    <input type="number" id="m" name="m" placeholder="Nombre de machines"><br><br>
-    <input type="hidden" id="n" name="n" placeholder="Nombre de tâches"><br><br>
-    <input type="hidden" id="k" name="k" placeholder="Nombre d'itérations"><br><br>
-    <input type="hidden" id="dmin" name="dmin" placeholder="Durée de tâches minimale"><br><br>
-    <input type="hidden" id="dmax" name="dmax" placeholder="Durée de tâches maximale"><br><br>
-    <button type="submit" id="submit">Lancer</button>
-
+    
+    <div class="container">
+        <label for="algorithms">Algorithme: </label>
+        <select name="algorithms" id="algorithms">
+            <option value="lsa" selected>LSA</option>
+            <option value="lpt">LPT</option>
+            <option value="rma">RMA</option>
+        </select><br><br>
+        <input type="number" id="m" name="m" placeholder="Donner le nombre de machines..."><br><br>
+        <input type="hidden" id="n" name="n" placeholder="Donner le nombre de tâches..."><br><br>
+        <input type="hidden" id="k" name="k" placeholder="Donner le nombre d'itérations..."><br><br>
+        <input type="hidden" id="dmin" name="dmin" placeholder="Donner la durée de tâches minimale..."><br><br>
+        <input type="hidden" id="dmax" name="dmax" placeholder="Donner la durée de tâches maximale..."><br><br>
+        <div class="btn-container">
+            <button type="submit" id="submit">Lancer</button>
+        </div>
+        
+    </div>
     <script type="module" defer src="app.js"></script>
 </body>
 </html>
