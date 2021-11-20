@@ -3,12 +3,12 @@
 import {Im, IPrimeM, IR} from "./mode.js"
 
 /* Cache ou affiche les champs en fonction de l'algorithme choisi */
-document.querySelector("#algorithms").addEventListener("change", () => {
-    let selected = document.querySelector("#algorithms")
-              .options[document.querySelector("#algorithms").selectedIndex].value;
+document.querySelector("#instance-type").addEventListener("change", () => {
+    let selected = document.querySelector("#instance-type")
+              .options[document.querySelector("#instance-type").selectedIndex].value;
 
-    document.querySelector("#algorithms").value = selected;
-    if (selected === "rma") {
+    document.querySelector("#instance-type").value = selected;
+    if (selected === "ir") {
         document.querySelector("#n").setAttribute("type", "number");
         document.querySelector("#k").setAttribute("type", "number");
         document.querySelector("#dmin").setAttribute("type", "number");
@@ -23,21 +23,21 @@ document.querySelector("#algorithms").addEventListener("change", () => {
 
 /* Fait parvenir les valeurs saisies par l'utilisateur */
 document.querySelector("#submit").onclick = () => {
-    let selected = document.querySelector("#algorithms")
-                .options[document.querySelector("#algorithms").selectedIndex].value;
+    let selected = document.querySelector("#instance-type")
+                .options[document.querySelector("#instance-type").selectedIndex].value;
     const m = document.querySelector("#m").valueAsNumber;
     
     switch (selected) {
         
-        case "lsa":
+        case "im":
             generateIm(m);
             break;
 
-        case "lpt":
+        case "i-prime-m":
             generateIPrimeM(m);
             break;
 
-        case "rma":
+        case "ir":
             const n = document.querySelector("#m").valueAsNumber;
             const k = document.querySelector("#k").valueAsNumber;
             const dmin = document.querySelector("#dmin").valueAsNumber;

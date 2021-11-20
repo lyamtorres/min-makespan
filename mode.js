@@ -48,17 +48,17 @@ class Mode {
 
     LSA(useLPT) {
         let minorIndex;
-        const machines = new Array(this.m).fill(0);
+        const M = new Array(this.m).fill(0);
         const tasks = [...this.D];
 
         if (useLPT) tasks.sort().reverse();
 
         for (let i = 0; i < this.n; i++) {
-            minorIndex = machines.indexOf(Math.min(...machines));
-            machines[minorIndex] += tasks[i]; 
+            minorIndex = M.indexOf(Math.min(...M));
+            M[minorIndex] += tasks[i]; 
         }
 
-        return Math.max(...machines); // Retourne la valeur maximum dans machines
+        return Math.max(...M);
     }
 
     LPT() {
@@ -67,23 +67,23 @@ class Mode {
 
     RMA() {
         let randomIndex;
-        const machines = new Array(this.m).fill(0);
+        const M = new Array(this.m).fill(0);
         const tasks = [...this.D];
 
         for (let i = 0; i < this.n; i++) {
             randomIndex = Math.floor(Math.random() * (this.m - 0)) + 0;
-            machines[randomIndex] += tasks[i]; 
+            M[randomIndex] += tasks[i]; 
         }
 
-        return Math.max(...machines);
+        return Math.max(...M);
     }
 }
 
 class Im extends Mode {
     constructor(m) {
         super(m);
-        this.n = Math.pow(m, 2) + 1; // Nombre de tâches (m^2 + 1)
-        this.D = this.generateTasksDuration(); // Tâches
+        this.n = Math.pow(m, 2) + 1;
+        this.D = this.generateTasksDuration();
     }
 
     generateTasksDuration() {
